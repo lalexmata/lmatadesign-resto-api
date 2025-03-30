@@ -19,7 +19,7 @@ const typeOrmConfig: DataSourceOptions = {
   database: getEnvVariable('DB_NAME'),
   entities: [__dirname + '/../**/*.entity.{ts,js}'],
   migrations: [__dirname + '/migrations/*.{ts,js}'],
-  synchronize: false,
+  synchronize: true,
   //autoLoadEntities: true,
   logging: true,
 };

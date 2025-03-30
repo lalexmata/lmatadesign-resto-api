@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, BeforeInsert, BeforeUpdate } from 'typeorm';
 import { Role } from './role.entity';
 import * as bcrypt from 'bcrypt';
+import { Exclude } from 'class-transformer';
 
 @Entity('users')
 export class User {
@@ -16,6 +17,7 @@ export class User {
   @Column({ unique: true, length: 100 })
   user: string;
 
+  @Exclude()
   @Column()
   password: string;
 
