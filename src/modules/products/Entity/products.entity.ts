@@ -1,5 +1,6 @@
 import { Category } from "src/modules/categories/Entity/category.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ProductoInsumo } from "./productInventory.entity";
 
 @Entity('products')
 export class Product {
@@ -28,4 +29,7 @@ export class Product {
     inverseJoinColumn: { name: 'category_id', referencedColumnName: 'id' },
   })
 	categories: Category[]
+
+	@OneToMany(() => ProductoInsumo, (productoInsumo) => productoInsumo.product)
+	productsInventory: ProductoInsumo[];
 }
