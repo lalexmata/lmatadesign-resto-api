@@ -5,7 +5,7 @@ import { Order } from './Entity/orders.entity';
 import { OrderDetail } from './Entity/ordersDetail.entity';
 import { Inventory } from '../inventario/Entity/inventory.entity';
 import { Product } from '../products/Entity/products.entity';
-import { ProductoInsumo } from '../products/Entity/productInventory.entity';
+import { ProductInventory } from '../products/Entity/productInventory.entity';
 import { User } from '../users/Entity/user.entity';
 import { Client } from '../clients/Entity/clients.entity';
 import { Table } from '../tables/Entity/tables.entity';
@@ -17,7 +17,7 @@ import { OrdersController } from './controllers/orders.controller';
     OrderDetail, 
     Inventory, 
     Product, 
-    ProductoInsumo,
+    ProductInventory,
     User,
     Client,
     Table

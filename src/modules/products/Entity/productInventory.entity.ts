@@ -3,7 +3,7 @@ import { Product } from './products.entity';
 import { Inventory } from 'src/modules/inventario/Entity/inventory.entity';
 
 @Entity('products_inventory')
-export class ProductoInsumo {
+export class ProductInventory {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,5 +14,6 @@ export class ProductoInsumo {
   insumo: Inventory;
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
-  amount_used: number; // Cantidad de insumo necesario
+  quantity_used: number; // Cantidad de insumo necesario
+  
 }

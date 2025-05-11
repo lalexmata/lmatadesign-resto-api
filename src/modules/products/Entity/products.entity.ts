@@ -1,6 +1,6 @@
 import { Category } from "src/modules/categories/Entity/category.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { ProductoInsumo } from "./productInventory.entity";
+import { ProductInventory } from "./productInventory.entity";
 
 @Entity('products')
 export class Product {
@@ -22,6 +22,9 @@ export class Product {
   @Column({ type: 'boolean', default: true })
   state: boolean;
 
+  @Column({ type: 'text', nullable: true})
+  image: string;
+
 	@ManyToMany(() => Category, (categoria) => categoria.product, {eager: true})
 	@JoinTable({
     name: 'products_categories',
@@ -30,6 +33,6 @@ export class Product {
   })
 	categories: Category[]
 
-	@OneToMany(() => ProductoInsumo, (productoInsumo) => productoInsumo.product)
-	productsInventory: ProductoInsumo[];
+	@OneToMany(() => ProductInventory, (productInventory) => productInventory.product)
+	productsInventory: ProductInventory[];
 }

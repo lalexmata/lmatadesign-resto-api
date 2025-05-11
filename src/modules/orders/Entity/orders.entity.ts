@@ -1,22 +1,33 @@
-import { Client } from "src/modules/clients/Entity/clients.entity";
-import { Table } from "src/modules/tables/Entity/tables.entity";
-import { User } from "src/modules/users/Entity/user.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { OrderDetail } from "./ordersDetail.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+  CreateDateColumn,
+} from 'typeorm';
+import { User } from 'src/modules/users/Entity/user.entity';
+import { Client } from 'src/modules/clients/Entity/clients.entity';
+import { Table } from 'src/modules/tables/Entity/tables.entity';
+import { OrderDetail } from './ordersDetail.entity';
 
 @Entity('orders')
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Table, { nullable: true, eager: true }) 
+  @ManyToOne(() => Table, { nullable: true, eager: true })
+  @JoinColumn({ name: 'table_id' })
   table?: Table;
 
-  @ManyToOne(() => Client, { nullable: true, eager: true }) 
+  @ManyToOne(() => Client, { nullable: true, eager: true })
+  @JoinColumn({ name: 'client_id' })
   client?: Client;
 
   @ManyToOne(() => User, { eager: true })
-  user: User; // Mesero que tomó el pedido
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @CreateDateColumn()
   created_at: Date;
@@ -24,12 +35,17 @@ export class Order {
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   total: number;
 
-  @Column({ type: 'enum', enum: ['Pendiente', 'En Preparación', 'Listo', 'Entregado', 'Cancelado'], default: 'Pendiente' })
+  @Column({
+    type: 'enum',
+    enum: ['Pendiente', 'En Preparación', 'Listo', 'Entregado', 'Cancelado'],
+    default: 'Pendiente',
+  })
   state: string;
 
-  /*@ManyToOne(() => Descuento, { nullable: true, eager: true })
-  discount?: Descuento;*/
+  @Column({ type: 'text', nullable: true})
+  observations: string;
 
-  @OneToMany(() => OrderDetail, detallePedido => detallePedido.order)
+  @OneToMany(() => OrderDetail, (detail) => detail.order, { cascade: true, eager: true })
   detail: OrderDetail[];
+
 }

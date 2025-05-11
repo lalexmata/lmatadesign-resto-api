@@ -1,4 +1,4 @@
-import { ProductoInsumo } from "src/modules/products/Entity/productInventory.entity";
+import { ProductInventory } from "src/modules/products/Entity/productInventory.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('inventory')
@@ -19,8 +19,8 @@ export class Inventory {
 	stock_min: number;
 
 	@Column({ type: 'tinyint', default: 1 })
-  state: number; // 1 = disponible, 0 = No disponible
+  	state: number; // 1 = disponible, 0 = No disponible
 
-	@OneToMany(() => ProductoInsumo, (productoInsumo) => productoInsumo.insumo)
-	productsInventory: ProductoInsumo[];
+	@OneToMany(() => ProductInventory, (productInventory) => productInventory.insumo)
+	productsInventory: ProductInventory[];
 }

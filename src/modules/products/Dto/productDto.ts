@@ -1,5 +1,6 @@
 import { PartialType } from "@nestjs/mapped-types";
-import { IsArray, IsBoolean, isDecimal, IsNotEmpty, IsNumber, IsOptional, IsString, Min } from "class-validator";
+import { Type } from "class-transformer";
+import { IsArray, IsBoolean, isDecimal, IsNotEmpty, IsNumber, IsOptional, IsString, Min, ValidateNested } from "class-validator";
 
 export class CreateProductDto {
     @IsString()
@@ -26,6 +27,20 @@ export class CreateProductDto {
     @IsBoolean()
     @IsOptional()
     state?: boolean;
+
+    @IsString()
+    @IsOptional()
+    image?: string; 
+
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ProductIngredientDto)
+    ingredients: ProductIngredientDto[];
 }
 
 export class UpdateProductDto extends PartialType(CreateProductDto){}
+
+export class ProductIngredientDto {
+    inventory_id: number;
+    quantity_used: number;
+}
