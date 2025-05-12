@@ -1,9 +1,8 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { MoreThan, Repository } from 'typeorm';
 import { Order } from '../Entity/orders.entity';
 import { OrderDetail } from '../Entity/ordersDetail.entity';
-import { ProductInventory } from 'src/modules/products/Entity/productInventory.entity';
 import { Inventory } from 'src/modules/inventario/Entity/inventory.entity';
 import { CreateOrderDto, UpdateOrderDto } from '../Dto/ordersDto';
 import { User } from 'src/modules/users/Entity/user.entity';
@@ -11,14 +10,15 @@ import { Client } from 'src/modules/clients/Entity/clients.entity';
 import { Table } from 'src/modules/tables/Entity/tables.entity';
 import { Product } from 'src/modules/products/Entity/products.entity';
 import { instanceToPlain } from 'class-transformer';
+import { ProductInventory } from 'src/modules/products/Entity/productInventory.entity';
 
 @Injectable()
 export class OrdersService {
 	constructor(
 		@InjectRepository(Order) private ordersRepository: Repository<Order>,
 		@InjectRepository(OrderDetail) private ordersDetailRepository: Repository<OrderDetail>,
-		@InjectRepository(ProductInventory) private productInventoryRepository: Repository<ProductInventory>,
 		@InjectRepository(Product) private productRepository: Repository<Product>,
+		@InjectRepository(ProductInventory) private productInventoryRepo: Repository<ProductInventory>,
 		@InjectRepository(Inventory) private inventoryRepository: Repository<Inventory>,
 		@InjectRepository(User) private userRepository: Repository<User>,
 		@InjectRepository(Client) private clientRepository: Repository<Client>,
@@ -85,10 +85,10 @@ export class OrdersService {
           newDetails.push(detail);
     
           // Descontar insumos del inventario
-          for (const relation of product.productsInventory) {
+          /*for (const relation of product.productsInventory) {
             relation.insumo.amount -= relation.quantity_used * item.quantity;
             await this.inventoryRepository.save(relation.insumo);
-          }
+          }*/
         }
 
         order.total = total;
@@ -177,8 +177,8 @@ export class OrdersService {
         });
   
         detailsToSave.push(orderDetail);
-
-        for (const pi of product.productsInventory) {
+        // esto es para descontar del inventario al crear el pedido
+        /*for (const pi of product.productsInventory) {
           const cantidadDescontar = Number(pi.quantity_used) * detail.quantity;
 
           const inventario = await this.inventoryRepository.findOne({ where: { id: pi.insumo.id } });
@@ -192,7 +192,7 @@ export class OrdersService {
 
           inventario.amount -= cantidadDescontar;
           await this.inventoryRepository.save(inventario);
-        }
+        }*/
       }
   
       await this.ordersDetailRepository.save(detailsToSave); // Se guardan todos los detalles
@@ -212,10 +212,8 @@ export class OrdersService {
     }
   }
   
-  	
-
 	async getAll(){
-		return await this.ordersRepository.find({ relations: ['detail']});
+		return await instanceToPlain(this.ordersRepository.find({ relations: ['detail']}));
 	}
 
 	async getOne(id: number){
@@ -246,4 +244,41 @@ export class OrdersService {
 	  
 		return { message: 'Pedido eliminado con éxito' };
 	}
+
+  async discountInventoryToday() {
+
+    try {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+    
+      const orders = await this.ordersRepository.find({
+        where: {
+          state: 'Entregado',
+          created_at: MoreThan(today),
+        },
+        relations: ['detail', 'detail.product'],
+      });
+      console.log("result de orders es",orders);
+      for (const order of orders) {
+        for (const detail of order.detail) {
+          const productInsumos = await this.productInventoryRepo.find({
+            where: { product: { id: detail.product.id } },
+            relations: ['insumo'],
+          });
+    
+          for (const pi of productInsumos) {
+            const cantidadTotal = pi.quantity_used * detail.quantity;
+            pi.insumo.amount -= cantidadTotal;
+            await this.inventoryRepository.save(pi.insumo);
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error)
+      throw new NotFoundException(`Ocurrió un error al actualizar inventario`);
+    }
+    
+    return { message: 'Inventario actualizado con base en órdenes entregadas del día', error: false };
+  }
+  
 }
