@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MoreThan, Repository } from 'typeorm';
+import { Between, MoreThan, Not, Repository } from 'typeorm';
 import { Order } from '../Entity/orders.entity';
 import { OrderDetail } from '../Entity/ordersDetail.entity';
 import { Inventory } from 'src/modules/inventario/Entity/inventory.entity';
@@ -249,15 +249,21 @@ export class OrdersService {
 
     try {
       const today = new Date();
-      today.setHours(0, 0, 0, 0);
-    
+      const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+      const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+
+      // Buscar órdenes del día NO procesadas
       const orders = await this.ordersRepository.find({
         where: {
-          state: 'Entregado',
-          created_at: MoreThan(today),
+          created_at: Between(startOfDay, endOfDay),
+          inventoryProcessed: 0,
+          state: Not('Cancelado') // opcional
         },
-        relations: ['detail', 'detail.product'],
+        relations: ['detail', 'detail.product']
       });
+      if(orders.length === 0){
+        return { message: 'No se encontraron actualizadiones de ordenes nuevas', error: false };
+      }
       console.log("result de orders es",orders);
       for (const order of orders) {
         for (const detail of order.detail) {
@@ -271,6 +277,8 @@ export class OrdersService {
             pi.insumo.amount -= cantidadTotal;
             await this.inventoryRepository.save(pi.insumo);
           }
+          order.inventoryProcessed = 1;
+          await this.ordersRepository.save(order);
         }
       }
     } catch (error) {

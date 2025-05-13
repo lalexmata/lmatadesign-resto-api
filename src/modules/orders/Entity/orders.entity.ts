@@ -45,6 +45,9 @@ export class Order {
   @Column({ type: 'text', nullable: true})
   observations: string;
 
+  @Column({ default: 0, name: 'inventory_processed' })
+  inventoryProcessed: number;
+
   @OneToMany(() => OrderDetail, (detail) => detail.order, { cascade: true, eager: true })
   detail: OrderDetail[];
 
