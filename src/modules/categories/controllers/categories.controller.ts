@@ -6,11 +6,9 @@ import {
   Param,
   Post,
   Put,
-  UseGuards,
 } from '@nestjs/common';
 import { CategoriesService } from '../services/categories.service';
 import { CreateCategoryDto, UpdateCategoryDto } from '../Dto/categoryDto';
-import { JwtAuthGuard } from 'src/modules/auth/Guards/jwt-auth.guard';
 import { Public } from 'src/modules/auth/Decorators/public.decorator';
 
 //@UseGuards(JwtAuthGuard)

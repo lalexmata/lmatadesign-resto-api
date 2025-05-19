@@ -19,7 +19,7 @@ export class ClientsService {
   }
 
   async create(data: CreateClientDto) {
-    const newClient = await this.clientRepo.create(data);
+    const newClient = this.clientRepo.create(data);
     return await this.clientRepo.save(newClient);
   }
 

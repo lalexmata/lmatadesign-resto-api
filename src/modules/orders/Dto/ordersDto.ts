@@ -5,18 +5,12 @@ import {
   IsArray,
   IsDecimal,
   IsEnum,
-  IsIn,
   IsInt,
-  IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsString,
   Min,
   ValidateNested,
 } from 'class-validator';
-import { Client } from 'src/modules/clients/Entity/clients.entity';
-import { Table } from 'src/modules/tables/Entity/tables.entity';
-import { User } from 'src/modules/users/Entity/user.entity';
 
 export class CreateOrderDto {
   @ApiProperty()

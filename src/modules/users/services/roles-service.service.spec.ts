@@ -7,7 +7,6 @@ import { CreateRoleDto, UpdateRoleDto } from '../Dto/RoleDto';
 
 describe('RolesService', () => {
   let service: RolesService;
-  let repository: Repository<Role>;
 
   const mockRole = {
     id: 1,
@@ -86,7 +85,10 @@ describe('RolesService', () => {
         name: 'updated-admin',
       };
 
-      mockRepository.findOne.mockResolvedValue({ ...mockRole, ...updateRoleDto });
+      mockRepository.findOne.mockResolvedValue({
+        ...mockRole,
+        ...updateRoleDto,
+      });
 
       const result = await service.update(1, updateRoleDto);
       expect(result).toEqual({ ...mockRole, ...updateRoleDto });

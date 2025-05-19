@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, MoreThan, Not, Repository } from 'typeorm';
+import { Between, Not, Repository } from 'typeorm';
 import { Order } from '../Entity/orders.entity';
 import { OrderDetail } from '../Entity/ordersDetail.entity';
 import { Inventory } from 'src/modules/inventario/Entity/inventory.entity';
@@ -67,7 +67,7 @@ export class OrdersService {
 
         // 4️⃣ Registrar nuevos detalles y descontar stock
         let total = 0;
-        const newDetails: any = [];
+        const newDetails: OrderDetail[] = [];
 
         for (const item of dto.detail) {
           const product = await this.productRepository.findOne({
@@ -106,9 +106,11 @@ export class OrdersService {
       }
 
       // 5️⃣ Actualizar los campos de la orden
-      order.table = dto.table_id ? ({ id: dto.table_id } as any) : null;
-      order.client = dto.client_id ? ({ id: dto.client_id } as any) : null;
-      order.user = { id: dto.user_id } as any;
+      order.table = dto.table_id ? ({ id: dto.table_id } as Table) : undefined;
+      order.client = dto.client_id
+        ? ({ id: dto.client_id } as Client)
+        : undefined;
+      order.user = { id: dto.user_id } as User;
       if (order.state) {
         order.state = dto.state ? dto.state : 'Pendiente';
       }
@@ -230,8 +232,8 @@ export class OrdersService {
   }
 
   async getAll() {
-    return await instanceToPlain(
-      this.ordersRepository.find({ relations: ['detail'] }),
+    return instanceToPlain(
+      await this.ordersRepository.find({ relations: ['detail'] }),
     );
   }
 
