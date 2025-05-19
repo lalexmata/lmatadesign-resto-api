@@ -1,6 +1,11 @@
-import { Product } from "src/modules/products/Entity/products.entity";
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-
+import { Product } from 'src/modules/products/Entity/products.entity';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('categories')
 export class Category {
@@ -12,5 +17,4 @@ export class Category {
 
   @ManyToMany(() => Product, (producto) => producto.categories)
   product: Product[];
-  
 }

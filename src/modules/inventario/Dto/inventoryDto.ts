@@ -1,8 +1,13 @@
-import { IsNumber, IsOptional, IsString, MaxLength, Min } from "class-validator";
-
+import {
+  IsNumber,
+  IsOptional,
+  IsString,
+  MaxLength,
+  Min,
+} from 'class-validator';
 
 export class CreateInsumoDto {
-	@IsString()
+  @IsString()
   @MaxLength(100)
   name: string;
 
@@ -21,7 +26,7 @@ export class CreateInsumoDto {
 }
 
 export class UpdateStockDto {
-	@IsNumber()
-	@Min(-1000) // Permite reducir stock hasta -1000
-	amount: number;
+  @IsNumber()
+  @Min(-1000) // Permite reducir stock hasta -1000
+  amount: number;
 }

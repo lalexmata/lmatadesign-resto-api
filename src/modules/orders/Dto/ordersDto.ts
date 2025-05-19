@@ -1,11 +1,22 @@
-import { PartialType } from "@nestjs/mapped-types";
-import { ApiProperty } from "@nestjs/swagger";
-import { Type } from "class-transformer";
-import { IsArray, IsDecimal, IsEnum, IsIn, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Min, ValidateNested } from "class-validator";
-import { Client } from "src/modules/clients/Entity/clients.entity";
-import { Table } from "src/modules/tables/Entity/tables.entity";
-import { User } from "src/modules/users/Entity/user.entity";
-
+import { PartialType } from '@nestjs/mapped-types';
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import {
+  IsArray,
+  IsDecimal,
+  IsEnum,
+  IsIn,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Min,
+  ValidateNested,
+} from 'class-validator';
+import { Client } from 'src/modules/clients/Entity/clients.entity';
+import { Table } from 'src/modules/tables/Entity/tables.entity';
+import { User } from 'src/modules/users/Entity/user.entity';
 
 export class CreateOrderDto {
   @ApiProperty()
@@ -21,7 +32,7 @@ export class CreateOrderDto {
   @ApiProperty()
   @IsInt()
   user_id: number; // ID del mesero que toma el pedido
-  
+
   @ApiProperty()
   @IsOptional()
   @IsEnum(['Pendiente', 'En Preparación', 'Listo', 'Entregado', 'Cancelado'])
@@ -36,7 +47,7 @@ export class CreateOrderDto {
   @IsDecimal()
   @IsInt()
   total?: number;
-  
+
   @ApiProperty()
   @IsOptional()
   @IsString()
@@ -47,11 +58,8 @@ export class CreateOrderDto {
   @ValidateNested({ each: true })
   @Type(() => CreateOrderDetailDto)
   detail: CreateOrderDetailDto[];
-
 }
-export class UpdateOrderDto extends PartialType(CreateOrderDto){
-  
-}
+export class UpdateOrderDto extends PartialType(CreateOrderDto) {}
 
 export class CreateOrderDetailDto {
   @ApiProperty()

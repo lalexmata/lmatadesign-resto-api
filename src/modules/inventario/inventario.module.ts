@@ -13,8 +13,19 @@ import { Client } from '../clients/Entity/clients.entity';
 import { Table } from '../tables/Entity/tables.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Inventory, Order, ProductInventory, OrderDetail, Product, User, Client, Table])],
+  imports: [
+    TypeOrmModule.forFeature([
+      Inventory,
+      Order,
+      ProductInventory,
+      OrderDetail,
+      Product,
+      User,
+      Client,
+      Table,
+    ]),
+  ],
   controllers: [InventarioController],
-  providers: [InventoryService, OrdersService]
+  providers: [InventoryService, OrdersService],
 })
 export class InventarioModule {}

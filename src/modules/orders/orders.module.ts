@@ -12,18 +12,20 @@ import { Table } from '../tables/Entity/tables.entity';
 import { OrdersController } from './controllers/orders.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([
-    Order, 
-    OrderDetail, 
-    Inventory, 
-    Product, 
-    ProductInventory,
-    User,
-    Client,
-    Table
-  ])],
+  imports: [
+    TypeOrmModule.forFeature([
+      Order,
+      OrderDetail,
+      Inventory,
+      Product,
+      ProductInventory,
+      User,
+      Client,
+      Table,
+    ]),
+  ],
   controllers: [OrdersController],
   providers: [OrdersService],
-  exports: [OrdersService]
+  exports: [OrdersService],
 })
 export class OrdersModule {}

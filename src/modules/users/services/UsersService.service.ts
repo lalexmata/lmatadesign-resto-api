@@ -9,23 +9,26 @@ import { AddRolesDto } from '../Dto/RoleDto';
 
 @Injectable()
 export class UsersService {
-    constructor(
-        @InjectRepository(User)
-        private readonly userRepository: Repository<User>,
-        @InjectRepository(Role)
-        private readonly roleRepository: Repository<Role>
-    ){}
-    
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+    @InjectRepository(Role)
+    private readonly roleRepository: Repository<Role>,
+  ) {}
+
   async findAll(): Promise<User[]> {
-    return this.userRepository.find({relations: ['roles']});
+    return this.userRepository.find({ relations: ['roles'] });
   }
 
   async findOne(id: number): Promise<User | null> {
     return this.userRepository.findOne({ where: { id }, relations: ['roles'] });
   }
 
-  async findByEmail(email: string){
-    return this.userRepository.findOne({ where: {email}, relations: ['roles']});
+  async findByEmail(email: string) {
+    return this.userRepository.findOne({
+      where: { email },
+      relations: ['roles'],
+    });
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -45,14 +48,14 @@ export class UsersService {
   async validatePassword(email: string, password: string): Promise<boolean> {
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) return false;
-    
+
     return await bcrypt.compare(password, user.password); // 👈 Compara la contraseña ingresada con la encriptada
   }
 
   async addRolesToUser(userId: number, addRolesDto: AddRolesDto) {
     const user = await this.userRepository.findOne({
       where: { id: userId },
-      relations: ['roles'],  // Cargar roles actuales del usuario
+      relations: ['roles'], // Cargar roles actuales del usuario
     });
 
     if (!user) {
@@ -61,7 +64,7 @@ export class UsersService {
 
     // Busca los roles que se desean agregar
     const roles = await this.roleRepository.findBy({
-      name: In(addRolesDto.roleNames),  // Utiliza `In()` para buscar múltiples roles
+      name: In(addRolesDto.roleNames), // Utiliza `In()` para buscar múltiples roles
     });
 
     if (roles.length === 0) {
@@ -74,6 +77,6 @@ export class UsersService {
     // Guarda los cambios en la base de datos
     await this.userRepository.save(user);
 
-    return user;  // Devuelve el usuario actualizado
+    return user; // Devuelve el usuario actualizado
   }
 }
