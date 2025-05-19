@@ -7,11 +7,9 @@ import {
   Delete,
   Param,
   Body,
-  UseGuards,
 } from '@nestjs/common';
 
 import { CreateUserDto, UpdateUserDto } from '../Dto/UsersDto';
-import { JwtAuthGuard } from 'src/modules/auth/Guards/jwt-auth.guard';
 import { Public } from 'src/modules/auth/Decorators/public.decorator';
 import { AddRolesDto } from '../Dto/RoleDto';
 import { classToPlain } from 'class-transformer';

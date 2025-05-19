@@ -6,12 +6,9 @@ import {
   Post,
   Put,
   Delete,
-  UseGuards,
 } from '@nestjs/common';
 import { RolesService } from '../services/roles-service.service';
 import { CreateRoleDto, UpdateRoleDto } from '../Dto/RoleDto';
-import { throwError } from 'rxjs';
-import { JwtAuthGuard } from 'src/modules/auth/Guards/jwt-auth.guard';
 
 //@UseGuards(JwtAuthGuard)
 @Controller('roles')
