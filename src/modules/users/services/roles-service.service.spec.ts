@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { RolesService } from './roles-service.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Role } from '../Entity/role.entity';
-import { Repository } from 'typeorm';
 import { CreateRoleDto, UpdateRoleDto } from '../Dto/RoleDto';
 
 describe('RolesService', () => {
@@ -34,7 +33,6 @@ describe('RolesService', () => {
     }).compile();
 
     service = module.get<RolesService>(RolesService);
-    repository = module.get<Repository<Role>>(getRepositoryToken(Role));
   });
 
   it('should be defined', () => {
