@@ -1,9 +1,19 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 import { CreateTableDto } from '@tables/Dto/tableDto';
 import { TablesService } from '@tables/services/tables.service';
 
 @Controller('tables')
+@UseGuards(AuthGuard('jwt'))
 export class TablesController {
   constructor(private tableService: TablesService) {}
 

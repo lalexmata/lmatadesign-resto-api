@@ -6,12 +6,15 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 import { CreateOrderDto, UpdateOrderDto } from '@orders/Dto/ordersDto';
 import { OrdersService } from '@orders/services/orders.service';
 
 @Controller('orders')
+@UseGuards(AuthGuard('jwt'))
 export class OrdersController {
   constructor(private readonly orderService: OrdersService) {}
 

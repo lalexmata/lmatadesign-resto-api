@@ -6,12 +6,15 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 import { CreateClientDto, UpdateClientDto } from '@clients/Dto/ClientDto';
 import { ClientsService } from '@clients/services/clients.service';
 
 @Controller('clients')
+@UseGuards(AuthGuard('jwt'))
 export class ClientsController {
   constructor(private clientService: ClientsService) {}
 

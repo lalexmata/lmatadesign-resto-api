@@ -17,8 +17,8 @@ import {
 } from '@categories/Dto/categoryDto';
 import { CategoriesService } from '@categories/services/categories.service';
 
-@UseGuards(AuthGuard('jwt'))
 @Controller('categories')
+@UseGuards(AuthGuard('jwt'))
 export class CategoriesController {
   constructor(private categoryService: CategoriesService) {}
 
