@@ -1,35 +1,34 @@
 import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
-import { TablesService } from '../services/tables.service';
-import { CreateTableDto } from '../Dto/tableDto';
+
+import { TablesService } from '@tables/services/tables.service';
+import { CreateTableDto } from '@tables/Dto/tableDto';
 
 @Controller('tables')
 export class TablesController {
+  constructor(private tableService: TablesService) {}
 
-    constructor(private tableService: TablesService)
-    {}
+  @Get()
+  async getAll() {
+    return await this.tableService.getAll();
+  }
 
-    @Get()
-    async getAll(){
-        return await this.tableService.getAll();
-    }
+  @Get(':id')
+  async getOne(id: number) {
+    return await this.tableService.getOne(id);
+  }
 
-    @Get(':id')
-    async getOne(id: number){
-        return await this.tableService.getOne(id);
-    }
+  @Post()
+  async create(@Body() data: CreateTableDto) {
+    return await this.tableService.create(data);
+  }
 
-    @Post()
-    async create(@Body() data: CreateTableDto){
-        return await this.tableService.create(data);
-    }
+  @Put(':id')
+  async update(id: number, @Body() data: any) {
+    return this.tableService.update(id, data);
+  }
 
-    @Put(':id')
-    async update(id: number, @Body() data: any){
-        return this.tableService.update(id, data);
-    }
-
-    @Delete(':id')
-    async delete(id: number){
-        return await this.tableService.delete(id);
-    }
+  @Delete(':id')
+  async delete(id: number) {
+    return await this.tableService.delete(id);
+  }
 }

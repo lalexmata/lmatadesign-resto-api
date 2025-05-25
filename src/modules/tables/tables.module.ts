@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Table } from './Entity/tables.entity';
 
 @Module({
-  imports: [ TypeOrmModule.forFeature([Table])],
+  imports: [TypeOrmModule.forFeature([Table])],
   providers: [TablesService],
   controllers: [TablesController],
 })
