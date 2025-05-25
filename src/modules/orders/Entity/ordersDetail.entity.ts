@@ -1,12 +1,12 @@
+import { Product } from '@products/Entity/products.entity';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
+  Entity,
   JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Order } from './orders.entity';
-import { Product } from '@products/Entity/products.entity';
 
 @Entity('orders_detail')
 export class OrderDetail {

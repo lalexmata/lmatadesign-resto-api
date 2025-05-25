@@ -11,11 +11,11 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 
 import { Public } from '@auth/Decorators/public.decorator';
-import { CategoriesService } from '@categories/services/categories.service';
 import {
   CreateCategoryDto,
   UpdateCategoryDto,
 } from '@categories/Dto/categoryDto';
+import { CategoriesService } from '@categories/services/categories.service';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('categories')

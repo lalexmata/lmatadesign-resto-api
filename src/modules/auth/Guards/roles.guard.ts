@@ -1,6 +1,6 @@
-import { Request } from 'express';
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { Request } from 'express';
 
 import { User } from '@users/interfaces/user.interface';
 

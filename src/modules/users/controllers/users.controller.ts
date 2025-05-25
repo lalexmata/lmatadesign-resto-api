@@ -2,13 +2,13 @@ import { AuthGuard } from '@nestjs/passport';
 import { instanceToPlain } from 'class-transformer';
 
 import {
+  Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   Put,
-  Delete,
-  Param,
-  Body,
   UseGuards,
 } from '@nestjs/common';
 

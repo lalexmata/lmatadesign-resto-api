@@ -8,16 +8,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { instanceToPlain } from 'class-transformer';
 import { Between, Not, Repository } from 'typeorm';
 
-import { Inventory } from '@inventario/Entity/inventory.entity';
-import { User } from '@users/Entity/user.entity';
 import { Client } from '@clients/Entity/clients.entity';
-import { Table } from '@tables/Entity/tables.entity';
-import { Product } from '@products/Entity/products.entity';
+import { Inventory } from '@inventario/Entity/inventory.entity';
 import { ProductInventory } from '@products/Entity/productInventory.entity';
+import { Product } from '@products/Entity/products.entity';
+import { Table } from '@tables/Entity/tables.entity';
+import { User } from '@users/Entity/user.entity';
 
+import { CreateOrderDto, UpdateOrderDto } from '@orders/Dto/ordersDto';
 import { Order } from '@orders/Entity/orders.entity';
 import { OrderDetail } from '@orders/Entity/ordersDetail.entity';
-import { CreateOrderDto, UpdateOrderDto } from '@orders/Dto/ordersDto';
 
 @Injectable()
 export class OrdersService {

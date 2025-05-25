@@ -8,8 +8,8 @@ import {
   Put,
 } from '@nestjs/common';
 
-import { ProductsService } from '@products/services/products.service';
 import { CreateProductDto, UpdateProductDto } from '@products/Dto/productDto';
+import { ProductsService } from '@products/services/products.service';
 
 @Controller('products')
 export class ProductsController {

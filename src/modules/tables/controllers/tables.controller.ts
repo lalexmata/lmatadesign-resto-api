@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
 
-import { TablesService } from '@tables/services/tables.service';
 import { CreateTableDto } from '@tables/Dto/tableDto';
+import { TablesService } from '@tables/services/tables.service';
 
 @Controller('tables')
 export class TablesController {

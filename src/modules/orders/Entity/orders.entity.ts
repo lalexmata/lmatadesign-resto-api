@@ -1,15 +1,15 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-  OneToMany,
-  CreateDateColumn,
-} from 'typeorm';
-import { User } from '@users/Entity/user.entity';
 import { Client } from '@clients/Entity/clients.entity';
 import { Table } from '@tables/Entity/tables.entity';
+import { User } from '@users/Entity/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { OrderDetail } from './ordersDetail.entity';
 
 @Entity('orders')

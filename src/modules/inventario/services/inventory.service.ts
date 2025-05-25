@@ -6,8 +6,8 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Inventory } from '@inventario/Entity/inventory.entity';
 import { CreateInsumoDto, UpdateStockDto } from '@inventario/Dto/inventoryDto';
+import { Inventory } from '@inventario/Entity/inventory.entity';
 
 @Injectable()
 export class InventoryService {

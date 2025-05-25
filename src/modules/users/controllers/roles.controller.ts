@@ -1,18 +1,18 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
   Put,
-  Delete,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { RolesService } from '@users/services/roles-service.service';
 import { CreateRoleDto, UpdateRoleDto } from '@users/Dto/RoleDto';
 import { Role } from '@users/Entity/role.entity';
+import { RolesService } from '@users/services/roles-service.service';
 import { DeleteResult } from 'typeorm';
 
 @Controller('roles')

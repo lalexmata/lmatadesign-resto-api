@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 
-import { RolesService } from '@users/services/roles-service.service';
 import { CreateRoleDto, UpdateRoleDto } from '@users/Dto/RoleDto';
 import { Role } from '@users/Entity/role.entity';
+import { RolesService } from '@users/services/roles-service.service';
 
 describe('RolesService', () => {
   let service: RolesService;

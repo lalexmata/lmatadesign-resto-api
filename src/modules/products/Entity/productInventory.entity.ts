@@ -1,6 +1,6 @@
+import { Inventory } from '@inventario/Entity/inventory.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Product } from './products.entity';
-import { Inventory } from '@inventario/Entity/inventory.entity';
 
 @Entity('products_inventory')
 export class ProductInventory {

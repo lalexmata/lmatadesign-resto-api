@@ -22,12 +22,12 @@
       "@auth/*": ["src/modules/auth/*"],
       "@categories/*": ["src/modules/categories/*"],
       "@clients/*": ["src/modules/clients/*"],
-      "@database/*": ["src/database/*"],
+      "@database/*": ["src/modules/database/*"],
       "@inventario/*": ["src/modules/inventario/*"],
       "@orders/*": ["src/modules/orders/*"],
       "@products/*": ["src/modules/products/*"],
       "@tables/*": ["src/modules/tables/*"],
-      "@users/*": ["src/modules/users/*"],
+      "@users/*": ["src/modules/users/*"]
     }
   }
 }

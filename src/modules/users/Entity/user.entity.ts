@@ -1,15 +1,15 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  JoinTable,
-  BeforeInsert,
-  BeforeUpdate,
-} from 'typeorm';
-import { Role } from './role.entity';
 import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Role } from './role.entity';
 
 @Entity('users')
 export class User {

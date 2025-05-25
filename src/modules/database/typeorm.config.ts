@@ -1,5 +1,6 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import 'dotenv/config';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 function getEnvVariable(name: string): string {
   const value = process.env[name];
@@ -9,9 +10,8 @@ function getEnvVariable(name: string): string {
   return value;
 }
 
-// Configuración de TypeORM sin valores opcionales
-const typeOrmConfig: DataSourceOptions = {
-  type: 'mysql', // 👈 Aquí aseguramos que siempre sea "postgres"
+const typeOrmConfig: TypeOrmModuleOptions = {
+  type: 'mysql',
   host: getEnvVariable('DB_HOST'),
   port: parseInt(getEnvVariable('DB_PORT')),
   username: getEnvVariable('DB_USER'),
@@ -25,5 +25,4 @@ const typeOrmConfig: DataSourceOptions = {
 
 export default typeOrmConfig;
 
-// ✅ Crear DataSource sin spread (...) para evitar problemas de tipos
-export const AppDataSource = new DataSource(typeOrmConfig);
+export const AppDataSource = new DataSource(typeOrmConfig as DataSourceOptions);
