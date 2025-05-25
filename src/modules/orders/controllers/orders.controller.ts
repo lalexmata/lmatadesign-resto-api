@@ -7,8 +7,9 @@ import {
   Get,
   Delete,
 } from '@nestjs/common';
-import { OrdersService } from '../services/orders.service';
-import { CreateOrderDto, UpdateOrderDto } from '../Dto/ordersDto';
+
+import { OrdersService } from '@orders/services/orders.service';
+import { CreateOrderDto, UpdateOrderDto } from '@orders/Dto/ordersDto';
 
 @Controller('orders')
 export class OrdersController {

@@ -1,4 +1,4 @@
-import { Category } from 'src/modules/categories/Entity/category.entity';
+import { Category } from '@categories/Entity/category.entity';
 import {
   Column,
   Entity,

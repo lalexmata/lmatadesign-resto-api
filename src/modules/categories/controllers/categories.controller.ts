@@ -6,12 +6,18 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
-import { CategoriesService } from '../services/categories.service';
-import { CreateCategoryDto, UpdateCategoryDto } from '../Dto/categoryDto';
-import { Public } from 'src/modules/auth/Decorators/public.decorator';
+import { AuthGuard } from '@nestjs/passport';
 
-//@UseGuards(JwtAuthGuard)
+import { Public } from '@auth/Decorators/public.decorator';
+import { CategoriesService } from '@categories/services/categories.service';
+import {
+  CreateCategoryDto,
+  UpdateCategoryDto,
+} from '@categories/Dto/categoryDto';
+
+@UseGuards(AuthGuard('jwt'))
 @Controller('categories')
 export class CategoriesController {
   constructor(private categoryService: CategoriesService) {}

@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
-import { OrdersService } from './services/orders.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Order } from './Entity/orders.entity';
-import { OrderDetail } from './Entity/ordersDetail.entity';
-import { Inventory } from '../inventario/Entity/inventory.entity';
-import { Product } from '../products/Entity/products.entity';
-import { ProductInventory } from '../products/Entity/productInventory.entity';
-import { User } from '../users/Entity/user.entity';
-import { Client } from '../clients/Entity/clients.entity';
-import { Table } from '../tables/Entity/tables.entity';
-import { OrdersController } from './controllers/orders.controller';
+
+import { Inventory } from '@inventario/Entity/inventory.entity';
+import { Product } from '@products/Entity/products.entity';
+import { ProductInventory } from '@products/Entity/productInventory.entity';
+import { User } from '@users/Entity/user.entity';
+import { Client } from '@clients/Entity/clients.entity';
+import { Table } from '@tables/Entity/tables.entity';
+
+import { Order } from '@orders/Entity/orders.entity';
+import { OrderDetail } from '@orders/Entity/ordersDetail.entity';
+import { OrdersController } from '@orders/controllers/orders.controller';
+import { OrdersService } from '@orders/services/orders.service';
 
 @Module({
   imports: [

@@ -1,7 +1,7 @@
 import { IsString, IsEmail } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { Exclude, Expose } from 'class-transformer';
-import { Role } from '../Entity/role.entity';
+import { Role } from '@users/Entity/role.entity';
 
 export class CreateUserDto {
   @IsString()

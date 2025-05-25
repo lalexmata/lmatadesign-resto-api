@@ -5,17 +5,19 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, Not, Repository } from 'typeorm';
-import { Order } from '../Entity/orders.entity';
-import { OrderDetail } from '../Entity/ordersDetail.entity';
-import { Inventory } from 'src/modules/inventario/Entity/inventory.entity';
-import { CreateOrderDto, UpdateOrderDto } from '../Dto/ordersDto';
-import { User } from 'src/modules/users/Entity/user.entity';
-import { Client } from 'src/modules/clients/Entity/clients.entity';
-import { Table } from 'src/modules/tables/Entity/tables.entity';
-import { Product } from 'src/modules/products/Entity/products.entity';
 import { instanceToPlain } from 'class-transformer';
-import { ProductInventory } from 'src/modules/products/Entity/productInventory.entity';
+import { Between, Not, Repository } from 'typeorm';
+
+import { Inventory } from '@inventario/Entity/inventory.entity';
+import { User } from '@users/Entity/user.entity';
+import { Client } from '@clients/Entity/clients.entity';
+import { Table } from '@tables/Entity/tables.entity';
+import { Product } from '@products/Entity/products.entity';
+import { ProductInventory } from '@products/Entity/productInventory.entity';
+
+import { Order } from '@orders/Entity/orders.entity';
+import { OrderDetail } from '@orders/Entity/ordersDetail.entity';
+import { CreateOrderDto, UpdateOrderDto } from '@orders/Dto/ordersDto';
 
 @Injectable()
 export class OrdersService {

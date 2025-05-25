@@ -6,32 +6,40 @@ import {
   Post,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
-import { RolesService } from '../services/roles-service.service';
-import { CreateRoleDto, UpdateRoleDto } from '../Dto/RoleDto';
+import { AuthGuard } from '@nestjs/passport';
 
-//@UseGuards(JwtAuthGuard)
+import { RolesService } from '@users/services/roles-service.service';
+import { CreateRoleDto, UpdateRoleDto } from '@users/Dto/RoleDto';
+import { Role } from '@users/Entity/role.entity';
+import { DeleteResult } from 'typeorm';
+
 @Controller('roles')
+@UseGuards(AuthGuard('jwt'))
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
   @Get()
-  findAll() {
+  findAll(): Promise<Role[]> {
     return this.rolesService.findAll();
   }
 
   @Post()
-  create(@Body() data: CreateRoleDto) {
+  create(@Body() data: CreateRoleDto): Promise<Role> {
     return this.rolesService.create(data);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() data: UpdateRoleDto) {
+  update(
+    @Param('id') id: number,
+    @Body() data: UpdateRoleDto,
+  ): Promise<Role | null> {
     return this.rolesService.update(id, data);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
+  delete(@Param('id') id: number): Promise<DeleteResult> {
     return this.rolesService.remove(id);
   }
 }

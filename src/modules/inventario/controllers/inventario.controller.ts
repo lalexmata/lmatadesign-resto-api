@@ -1,7 +1,9 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { InventoryService } from '../services/inventory.service';
-import { CreateInsumoDto, UpdateStockDto } from '../Dto/inventoryDto';
-import { OrdersService } from 'src/modules/orders/services/orders.service';
+
+import { OrdersService } from '@orders/services/orders.service';
+
+import { InventoryService } from '@inventario/services/inventory.service';
+import { CreateInsumoDto, UpdateStockDto } from '@inventario/Dto/inventoryDto';
 
 @Controller('inventory')
 export class InventarioController {

@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ProductsService } from './services/products.service';
-import { ProductsController } from './contollers/products.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from './Entity/products.entity';
-import { Category } from '../categories/Entity/category.entity';
-import { Inventory } from '../inventario/Entity/inventory.entity';
-import { ProductInventory } from './Entity/productInventory.entity';
+
+import { Product } from '@products/Entity/products.entity';
+import { Category } from '@categories/Entity/category.entity';
+import { Inventory } from '@inventario/Entity/inventory.entity';
+
+import { ProductsService } from '@products/services/products.service';
+import { ProductsController } from '@products/controllers/products.controller';
+import { ProductInventory } from '@products/Entity/productInventory.entity';
 
 @Module({
   imports: [

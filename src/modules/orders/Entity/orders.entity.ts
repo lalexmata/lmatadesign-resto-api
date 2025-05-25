@@ -7,9 +7,9 @@ import {
   OneToMany,
   CreateDateColumn,
 } from 'typeorm';
-import { User } from 'src/modules/users/Entity/user.entity';
-import { Client } from 'src/modules/clients/Entity/clients.entity';
-import { Table } from 'src/modules/tables/Entity/tables.entity';
+import { User } from '@users/Entity/user.entity';
+import { Client } from '@clients/Entity/clients.entity';
+import { Table } from '@tables/Entity/tables.entity';
 import { OrderDetail } from './ordersDetail.entity';
 
 @Entity('orders')

@@ -1,4 +1,6 @@
-import { UsersService } from '../services/UsersService.service';
+import { AuthGuard } from '@nestjs/passport';
+import { instanceToPlain } from 'class-transformer';
+
 import {
   Controller,
   Get,
@@ -7,28 +9,29 @@ import {
   Delete,
   Param,
   Body,
+  UseGuards,
 } from '@nestjs/common';
 
-import { CreateUserDto, UpdateUserDto } from '../Dto/UsersDto';
-import { Public } from 'src/modules/auth/Decorators/public.decorator';
-import { AddRolesDto } from '../Dto/RoleDto';
-import { classToPlain } from 'class-transformer';
+import { Public } from '@auth/Decorators/public.decorator';
+import { AddRolesDto } from '@users/Dto/RoleDto';
+import { CreateUserDto, UpdateUserDto } from '@users/Dto/UsersDto';
+import { UsersService } from '@users/services/UsersService.service';
 
-//@UseGuards(JwtAuthGuard)
 @Controller('users')
+@UseGuards(AuthGuard('jwt'))
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
   findAll() {
     const users = this.usersService.findAll();
-    return classToPlain(users);
+    return instanceToPlain(users);
   }
 
   @Get(':id')
   findOne(@Param('id') id: number) {
     const user = this.usersService.findOne(id);
-    return classToPlain(user);
+    return instanceToPlain(user);
   }
 
   @Post()
@@ -39,7 +42,7 @@ export class UsersController {
   @Put(':id')
   update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
     const update = this.usersService.update(id, updateUserDto);
-    return classToPlain(update);
+    return instanceToPlain(update);
   }
 
   @Delete(':id')

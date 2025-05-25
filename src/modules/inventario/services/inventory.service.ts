@@ -4,9 +4,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Inventory } from '../Entity/inventory.entity';
 import { Repository } from 'typeorm';
-import { CreateInsumoDto, UpdateStockDto } from '../Dto/inventoryDto';
+
+import { Inventory } from '@inventario/Entity/inventory.entity';
+import { CreateInsumoDto, UpdateStockDto } from '@inventario/Dto/inventoryDto';
 
 @Injectable()
 export class InventoryService {
