@@ -16,6 +16,18 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@modules/*": ["src/modules/*"],
+      "@auth/*": ["src/modules/auth/*"],
+      "@categories/*": ["src/modules/categories/*"],
+      "@clients/*": ["src/modules/clients/*"],
+      "@database/*": ["src/database/*"],
+      "@inventario/*": ["src/modules/inventario/*"],
+      "@orders/*": ["src/modules/orders/*"],
+      "@products/*": ["src/modules/products/*"],
+      "@tables/*": ["src/modules/tables/*"],
+      "@users/*": ["src/modules/users/*"],
+    }
   }
 }
