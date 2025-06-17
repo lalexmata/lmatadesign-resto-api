@@ -26,4 +26,7 @@ export class OrderDetail {
 
   @Column({ type: 'decimal', precision: 10, scale: 2 })
   subtotal: number;
+
+  @Column({ default: false })
+  is_paid: boolean;
 }

@@ -12,6 +12,7 @@ import { Order } from '@orders/Entity/orders.entity';
 import { OrderDetail } from '@orders/Entity/ordersDetail.entity';
 import { OrdersController } from '@orders/controllers/orders.controller';
 import { OrdersService } from '@orders/services/orders.service';
+import { Payment } from '@payment/Entity/payment.entity';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { OrdersService } from '@orders/services/orders.service';
       User,
       Client,
       Table,
+      Payment
     ]),
   ],
   controllers: [OrdersController],

@@ -27,7 +27,8 @@
       "@orders/*": ["src/modules/orders/*"],
       "@products/*": ["src/modules/products/*"],
       "@tables/*": ["src/modules/tables/*"],
-      "@users/*": ["src/modules/users/*"]
+      "@users/*": ["src/modules/users/*"],
+      "@payment/*": ["src/modules/payment/*"]
     }
   }
 }

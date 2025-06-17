@@ -11,6 +11,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { OrderDetail } from './ordersDetail.entity';
+import { Payment } from '@modules/payment/Entity/payment.entity';
 
 @Entity('orders')
 export class Order {
@@ -37,7 +38,7 @@ export class Order {
 
   @Column({
     type: 'enum',
-    enum: ['Pendiente', 'En Preparación', 'Listo', 'Entregado', 'Cancelado'],
+    enum: ['Pendiente', 'En Preparación', 'Listo', 'Entregado', 'Cancelado', 'Pagada'],
     default: 'Pendiente',
   })
   state: string;
@@ -53,4 +54,7 @@ export class Order {
     eager: true,
   })
   detail: OrderDetail[];
+
+  @OneToMany(() => Payment, payment => payment.order, { cascade: true })
+  payments: Payment[];
 }
