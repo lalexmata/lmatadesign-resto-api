@@ -34,7 +34,7 @@ export class User {
 
   @ManyToMany(() => Role, (role) => role.users)
   @JoinTable({
-    name: 'user_roles', // 👈 Nombre de la tabla pivote
+    name: 'role_user', // 👈 Nombre de la tabla pivote
     joinColumn: { name: 'user_id', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'role_id', referencedColumnName: 'id' },
   })

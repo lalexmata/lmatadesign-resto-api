@@ -7,7 +7,7 @@ export class Table {
   id: number;
 
   @Column({ unique: true })
-  number_table: number;
+  number: number;
 
   @Column()
   capacity: number;

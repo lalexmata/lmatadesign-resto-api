@@ -1,6 +1,6 @@
 export interface ITable {
   id: number;
-  number_table: number;
+  number: number;
   state: string;
   pedidos?: any;
 }

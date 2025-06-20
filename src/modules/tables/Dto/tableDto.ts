@@ -2,7 +2,7 @@ import { IsNumber } from 'class-validator';
 
 export class CreateTableDto {
   @IsNumber()
-  number_table: number;
+  number: number;
 
   @IsNumber()
   capacity: number;
