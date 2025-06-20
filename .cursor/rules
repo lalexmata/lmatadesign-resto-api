@@ -1,0 +1,197 @@
+# Reglas del Proyecto - LMATADesign Restaurante API
+
+## 🏗️ Arquitectura y Estructura
+
+### Estructura de Módulos
+
+- Cada módulo debe seguir la estructura estándar de NestJS:
+  ```
+  modules/
+  ├── [nombre-modulo]/
+  │   ├── [nombre-modulo].module.ts
+  │   ├── controllers/
+  │   ├── services/
+  │   ├── Dto/
+  │   ├── Entity/
+  │   └── interfaces/ (opcional)
+  ```
+
+### Convenciones de Nomenclatura
+
+- **Archivos**: kebab-case (ej: `auth.controller.ts`, `user.service.ts`)
+- **Clases**: PascalCase (ej: `AuthController`, `UserService`)
+- **Variables y métodos**: camelCase (ej: `getUserById`, `createOrder`)
+- **Constantes**: UPPER_SNAKE_CASE (ej: `JWT_SECRET`, `DATABASE_URL`)
+- **Interfaces**: PascalCase con prefijo I (ej: `IUser`, `IOrder`)
+
+## 📝 Estándares de Código
+
+### TypeScript
+
+- Usar tipos estrictos siempre que sea posible
+- Evitar `any` - usar `unknown` o tipos específicos
+- Implementar interfaces para DTOs y entidades
+- Usar enums para valores constantes
+
+### Imports y Exports
+
+- Agrupar imports en este orden:
+  1. Imports de Node.js
+  2. Imports de librerías externas
+  3. Imports de NestJS
+  4. Imports locales (relativos)
+- Usar imports nombrados en lugar de default cuando sea posible
+
+### Documentación
+
+- Documentar todos los endpoints con Swagger/OpenAPI
+- Incluir JSDoc para métodos complejos
+- Mantener README.md actualizado
+
+## 🔐 Seguridad
+
+### Autenticación y Autorización
+
+- Usar JWT para autenticación
+- Implementar guards para proteger rutas
+- Validar roles y permisos en cada endpoint
+- Usar decoradores `@Public()` para rutas públicas
+- Implementar rate limiting en endpoints sensibles
+
+### Validación de Datos
+
+- Usar class-validator para validar DTOs
+- Implementar transformadores con class-transformer
+- Validar datos de entrada en todos los endpoints
+- Sanitizar datos antes de guardar en base de datos
+
+## 🗄️ Base de Datos
+
+### TypeORM
+
+- Usar migrations para cambios de esquema
+- Implementar soft deletes cuando sea apropiado
+- Usar relaciones apropiadas (OneToMany, ManyToOne, etc.)
+- Optimizar queries con índices
+- Usar transacciones para operaciones complejas
+
+### Entidades
+
+- Definir relaciones claras entre entidades
+- Usar decoradores de validación en entidades
+- Implementar timestamps automáticos
+- Usar UUIDs para IDs cuando sea apropiado
+
+## 🧪 Testing
+
+### Unit Tests
+
+- Escribir tests para todos los servicios
+- Mockear dependencias externas
+- Usar describe blocks descriptivos
+- Mantener cobertura de código > 80%
+
+### E2E Tests
+
+- Testear flujos completos de usuario
+- Usar base de datos de test separada
+- Limpiar datos después de cada test
+
+## 🚀 Performance
+
+### Optimización
+
+- Implementar caching donde sea apropiado
+- Usar paginación en listados grandes
+- Optimizar queries de base de datos
+- Implementar compresión de respuestas
+
+### Logging
+
+- Usar logger estructurado
+- Loggear errores con contexto
+- Implementar diferentes niveles de log por ambiente
+
+## 📦 Gestión de Dependencias
+
+### Instalación
+
+- Usar `npm install` para instalar dependencias
+- Revisar dependencias regularmente
+- Mantener versiones actualizadas
+- Usar `npm audit` para verificar vulnerabilidades
+
+### Scripts
+
+- Usar scripts definidos en package.json
+- Ejecutar linting antes de commits
+- Ejecutar tests antes de deployments
+
+## 🔄 Git y Workflow
+
+### Commits
+
+- Usar Conventional Commits
+- Ejemplos:
+  - `feat: agregar autenticación JWT`
+  - `fix: corregir validación de email`
+  - `docs: actualizar README`
+  - `refactor: simplificar servicio de usuarios`
+
+### Branches
+
+- `main`: código de producción
+- `develop`: desarrollo activo
+- `feature/[nombre]`: nuevas funcionalidades
+- `hotfix/[nombre]`: correcciones urgentes
+
+## 🐳 Docker
+
+### Configuración
+
+- Usar multi-stage builds
+- Optimizar tamaño de imagen
+- Usar .dockerignore apropiado
+- Configurar variables de entorno
+
+## 📋 Checklist de Nuevas Funcionalidades
+
+Antes de crear una nueva funcionalidad, verificar:
+
+- [ ] ¿Está documentada la API con Swagger?
+- [ ] ¿Tiene tests unitarios y e2e?
+- [ ] ¿Sigue las convenciones de nomenclatura?
+- [ ] ¿Está protegida con autenticación/autorización?
+- [ ] ¿Tiene validación de datos?
+- [ ] ¿Está optimizada para performance?
+- [ ] ¿Sigue los principios SOLID?
+
+## 🚨 Errores Comunes a Evitar
+
+- No usar `any` en TypeScript
+- No exponer información sensible en logs
+- No olvidar manejar errores apropiadamente
+- No crear métodos muy largos (>50 líneas)
+- No duplicar código - extraer a servicios comunes
+- No olvidar validar datos de entrada
+- No usar console.log en producción
+
+## 📚 Recursos Útiles
+
+- [NestJS Documentation](https://docs.nestjs.com/)
+- [TypeORM Documentation](https://typeorm.io/)
+- [Class Validator](https://github.com/typestack/class-validator)
+- [JWT.io](https://jwt.io/)
+
+## 🎯 Objetivos del Proyecto
+
+Este proyecto es una API REST para gestión de restaurante que incluye:
+
+- Gestión de usuarios y roles
+- Gestión de productos e inventario
+- Gestión de órdenes y pagos
+- Gestión de mesas
+- Gestión de clientes
+- Sistema de autenticación y autorización
+
+Mantener siempre la escalabilidad, mantenibilidad y seguridad como prioridades.
