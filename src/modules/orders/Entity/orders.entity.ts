@@ -38,7 +38,14 @@ export class Order {
 
   @Column({
     type: 'enum',
-    enum: ['Pendiente', 'En Preparación', 'Listo', 'Entregado', 'Cancelado', 'Pagada'],
+    enum: [
+      'Pendiente',
+      'En Preparación',
+      'Listo',
+      'Entregado',
+      'Cancelado',
+      'Pagada',
+    ],
     default: 'Pendiente',
   })
   state: string;
@@ -55,6 +62,6 @@ export class Order {
   })
   detail: OrderDetail[];
 
-  @OneToMany(() => Payment, payment => payment.order, { cascade: true })
+  @OneToMany(() => Payment, (payment) => payment.order, { cascade: true })
   payments: Payment[];
 }

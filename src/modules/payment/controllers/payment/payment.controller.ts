@@ -4,18 +4,13 @@ import { CreatePaymentDto } from '@modules/payment/Dto/paymentDto';
 
 @Controller('payment')
 export class PaymentController {
+  constructor(private paymentService: PaymentService) {}
 
-    constructor(
-        private paymentService: PaymentService
-    ){}
+  @Get()
+  getAll() {}
 
-    @Get()
-    getAll(){
-        
-    }
-
-    @Post()
-    async create(@Body() dto: CreatePaymentDto) {
-        return this.paymentService.createPayment(dto);
-    }
+  @Post()
+  async create(@Body() dto: CreatePaymentDto) {
+    return this.paymentService.createPayment(dto);
+  }
 }

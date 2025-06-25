@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  JoinColumn,
+} from 'typeorm';
 import { Order } from 'src/modules/orders/Entity/orders.entity';
 import { PaymentMethod } from './payment-method.entity';
 
@@ -7,7 +14,7 @@ export class Payment {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Order, order => order.payments, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Order, (order) => order.payments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'order_id' })
   order: Order;
 

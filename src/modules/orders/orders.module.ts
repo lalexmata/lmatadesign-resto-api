@@ -25,7 +25,7 @@ import { Payment } from '@payment/Entity/payment.entity';
       User,
       Client,
       Table,
-      Payment
+      Payment,
     ]),
   ],
   controllers: [OrdersController],
